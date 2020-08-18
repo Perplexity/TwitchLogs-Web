@@ -1,0 +1,76 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+    var returnUrl = @Context.Request.Query["ReturnUrl"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/assets/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets/lib/fonts/circular-std/style.css" />
+    <link rel="stylesheet" href="~/assets/lib/fonts/fontawesome/css/fontawesome-all.css" />
+    <link rel="stylesheet" href="~/assets/css/style.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-container">
+        <div class="card ">
+            <div class="card-header text-center">
+                <a asp-controller="User" asp-action="Login"><img src="~/assets/images/logo.png" alt="logo"></a>
+                <span class="splash-description">Please enter your user information.</span>
+            </div>
+            <div class="card-body">
+                <form asp-action="Login" asp-route-returnUrl="@returnUrl">
+                    <div class="form-group">
+                        <input asp-for="Username" class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off">
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Password" class="form-control form-control-lg" id="password" type="password" placeholder="Password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Remember Me</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                    @if (ViewData.ModelState["Login"]?.Errors.Count > 0)
+                    {
+                        <span class="text-danger"><i class="fa fa-exclamation"></i> @ViewData.ModelState["Login"].Errors[0].ErrorMessage</span>
+                    }
+                </form>
+            </div>
+            <div class="card-footer bg-white p-0">
+                <div class="card-footer-item card-footer-item-bordered">
+                    <a href="#">Create An Account</a>
+                </div>
+                <div class="card-footer-item card-footer-item-bordered">
+                    <a href="#">Forgot Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/assets/lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="~/assets/lib/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+</html>

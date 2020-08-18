@@ -1,0 +1,16 @@
+[
+  {
+    "outputFileName": "wwwroot/assets/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/assets/js/extensions.js",
+      "wwwroot/assets/js/dashboard-index.js",
+      "wwwroot/assets/js/logs.js",
+      "wwwroot/assets/js/user-settings.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

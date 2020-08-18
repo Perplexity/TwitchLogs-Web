@@ -1,0 +1,23 @@
+﻿@model ViewLogsViewModel
+@{
+    ViewData["Title"] = "View Logs";
+}
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block">
+            <h3 class="section-title">Data range</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @await Html.PartialAsync("_DateRange")
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                @await Html.PartialAsync("_LogTable", new Tuple<string, string, string>(Model.Channel, Model.Sender, Model.Timezone))
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@model Tuple<string, string, string>
+    <div class="table-responsive">
+        <table width="100%" data-channel="@Model.Item1" data-sender="@Model.Item2" data-timezone="@Model.Item3" class="log-table table table-striped table-bordered wrap">
+            <thead>
+                <tr>
+                    <th style="width: 15%">Timestamp</th>
+                    <th>Sender</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+        </table>
+    </div>

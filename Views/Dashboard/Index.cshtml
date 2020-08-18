@@ -1,0 +1,118 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    var totalLogs = Model.LogCounts.Sum(x => x.Value);
+}
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title">Welcome back, @Model.User.Username</h2>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-inline-block">
+                    <h5 class="text-muted">Credits Remaining</h5>
+                    <h2 class="mb-0"> @($"{Model.User.Credits:##,###0}")</h2>
+                </div>
+                <div class="float-right icon-circle-medium  icon-box-lg  bg-success-light mt-1">
+                    <i class="fa fa-dollar-sign fa-fw fa-sm text-success"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-inline-block">
+                    <h5 class="text-muted">Channels Logged</h5>
+                    <h2 class="mb-0"> @Model.Channels.Count</h2>
+                </div>
+                <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                    <i class="fa fa-eye fa-fw fa-sm text-info"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-inline-block">
+                    <h5 class="text-muted">Total Logs</h5>
+                    <h2 class="mb-0"> @($"{totalLogs:##,###0}")</h2>
+                </div>
+                <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                    <i class="fa fa-file fa-fw fa-sm text-info"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block">
+            <h3 class="section-title">Stalk</h3>
+            <p>Enter a username to view all logs for that user (in channels you are logging)</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-4 col-lg-6 col-md-8 col-sm-9 col-9">
+        <form id="stalkForm">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                <div class="input-group-prepend"><span class="input-group-text">Username</span></div>
+                <input id="stalkUser" type="text" class="form-control">
+                <div class="input-group-append"><button class="btn btn-success btn-sm"><i class="fa fa-search"></i></button></div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block">
+            <h3 class="section-title">My Channels</h3>
+            <p>Every channel you are currently collecting chat logs for.</p>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>#</th>
+                            <th>Channel Name</th>
+                            <th>Log Count</th>
+                            <th></th>
+                        </tr>
+                        @for (var i = 0; i < Model.Channels.Count; i++)
+                        {
+                            var channel = Model.Channels[i];
+                            var logCount = Model.LogCounts[channel.Name];
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@channel.Name</td>
+                                <td>@($"{logCount:##,###0}")</td>
+                                <td>
+                                    <a asp-controller="Logs" asp-action="View" asp-route-channel="@channel.Name">
+                                        <button class="btn btn-success btn-circle"><i class="fa fa-eye"></i></button>
+                                    </a>
+                                    <button class="btn btn-danger btn-circle delete-channel" data-channel="@(channel.Id)"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="300">
+                                <button id="addChannel" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Channel</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
