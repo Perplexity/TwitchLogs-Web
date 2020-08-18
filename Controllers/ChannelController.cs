@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TwitchLib.Api;
-using TwitchLib.Api.Core.Models.Undocumented.ChannelPanels;
 using TwitchLogs_Web.Extensions;
 using TwitchLogs_Web.Models;
 using TwitchLogs_Web.Models.Database;

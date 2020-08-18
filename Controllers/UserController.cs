@@ -6,10 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using TwitchLib.Api.Core.Models.Undocumented.ChannelPanels;
-using TwitchLib.Api.V5;
 using TwitchLogs_Web.Models;
-using TwitchLogs_Web.Models.Database;
 
 namespace TwitchLogs_Web.Controllers
 {
